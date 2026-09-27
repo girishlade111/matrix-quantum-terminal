@@ -9,6 +9,8 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  output: 'export',
+  basePath: '/matrix-quantum-terminal',
 }
 
 export default nextConfig

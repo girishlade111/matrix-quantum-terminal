@@ -1,30 +1,88 @@
 # Matrix Quantum Terminal
 
-*Automatically synced with your [v0.app](https://v0.app) deployments*
+A Matrix-themed interactive terminal UI that simulates a quantum computing console. Type commands, watch a Matrix-style digital rain effect, and visualize quantum states and circuits — all rendered in a neon-green cyber aesthetic.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/gileb64375-5584s-projects/v0-matrix-quantum-terminal)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app/chat/projects/3avZ7HWfbP4)
+## What it does
 
-## Overview
+- **Interactive quantum terminal** — a fake-but-fun command-line interface with commands like `help`, `matrix`, `quantum`, `run`, `clear`, and `exit`
+- **Matrix rain effect** — canvas-based falling glyph animation toggled from the terminal
+- **Quantum circuit visualization** — animated circuit diagram showing gates and qubit states (|0⟩, |1⟩, |+⟩, |-⟩, Bell states)
+- **Simulated quantum operations** — "run" executes a fake quantum job with loading animation and state output
+- Fully client-side; no backend, no API keys, no data leaves the browser
 
-This repository will stay in sync with your deployed chats on [v0.app](https://v0.app).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.app](https://v0.app).
+## Features
 
-## Deployment
+- Retro terminal UI with blinking cursor, command history, and syntax-styled output
+- Matrix digital-rain canvas overlay
+- Quantum circuit SVG/canvas visualization with animated gates
+- shadcn/ui components (Radix) for polished dialogs and controls
+- Dark-mode friendly; responsive layout
+- Static-site friendly — builds to plain HTML/CSS/JS (`output: 'export'`)
 
-Your project is live at:
+## Tech stack
 
-**[https://vercel.com/gileb64375-5584s-projects/v0-matrix-quantum-terminal](https://vercel.com/gileb64375-5584s-projects/v0-matrix-quantum-terminal)**
+- **Next.js 15** (App Router, static export)
+- **React 19**, **TypeScript 5**
+- **Tailwind CSS 3** + `tailwindcss-animate`
+- **shadcn/ui** (Radix primitives), `lucide-react` icons
+- **Recharts** (visualization helper)
+- pnpm (lockfile included; npm works too)
 
-## Build your app
+## Quick start
 
-Continue building your app on:
+```bash
+# install dependencies
+npm install          # or: pnpm install
 
-**[https://v0.app/chat/projects/3avZ7HWfbP4](https://v0.app/chat/projects/3avZ7HWfbP4)**
+# run the dev server
+npm run dev          # open http://localhost:3000
 
-## How It Works
+# production build (static export to ./out)
+npm run build
+```
 
-1. Create and modify your project using [v0.app](https://v0.app)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+Serve the static export with any static host:
+
+```bash
+npx serve out
+```
+
+## Project structure
+
+```
+app/                 # Next.js App Router (layout, page, global styles)
+components/
+  quantum-terminal.tsx   # main terminal component + command engine
+  matrix-rain.tsx        # Matrix digital-rain canvas effect
+  quantum-circuit.tsx    # quantum circuit visualization
+  theme-provider.tsx     # next-themes provider
+  ui/                    # shadcn/ui primitives (button, etc.)
+lib/utils.ts         # cn() class helper
+public/              # static assets
+styles/              # additional styles
+next.config.mjs      # output: 'export', unoptimized images
+```
+
+## Environment variables
+
+None — the app is 100% client-side and needs no secrets.
+
+## Deployment notes
+
+- The app is statically exported (`out/`), so it can be hosted on **GitHub Pages**, **Vercel**, **Netlify**, or any static file host.
+- `next.config.mjs` sets `basePath: '/matrix-quantum-terminal'` for the GitHub Pages subpath deployment. If you deploy to a domain root (Vercel/custom domain), remove the `basePath` line and rebuild.
+
+## Commands reference
+
+| Command   | Effect                                      |
+| --------- | ------------------------------------------- |
+| `help`    | list available commands                     |
+| `matrix`  | toggle the Matrix digital-rain overlay       |
+| `quantum` | show the quantum circuit visualization      |
+| `run`     | simulate a quantum job with loading sequence|
+| `clear`   | clear the terminal                          |
+| `exit`    | show the exit message                       |
+
+---
+
+Built by Girish Lade — [ladestack.in](https://ladestack.in)
